@@ -53,7 +53,7 @@ var app = {
         var results = data.results;
         //console.log(data);
         for(var i = 0; i < results.length; i++){
-          var message = "<div class='message'></div>";
+          var message = "<div class='message chat'></div>";
 
           $('#main').append(message);
           $('.message:last').text(results[i]['username']+": "+ results[i]["text"]);
