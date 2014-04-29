@@ -8,6 +8,8 @@
     <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
+    <script src="bower_components/momentjs/moment.js"></script>
+
     <!-- your scripts -->
     <script src="scripts/config.js"></script>
     <script src="scripts/app.js"></script>
@@ -15,12 +17,16 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
+      <h2 class='roomName'>Lobby</h2>
       <!-- Your HTML goes here! -->
-      <button class='refresh'>Refresh</button>
-      <form>
-      <button class='sendSomeStuff' type='button'>Send</button>
+      <button class="hide">Hide Everything</button>
+      <button class='refresh '>Refresh</button>
+      <button class='room'>Choose a Chat Room!</button>
+      <form action = ''>
+        <button class='sendSomeStuff spinner' type='button'>Send</button>
         Type Your Message: <input type="text"></input>
       </form>
     </div>
+    <div class="friends">Friends</div>
   </body>
 </html>

@@ -82,3 +82,31 @@ form input[type=text] {
 .spinner img {
     padding: 10px;
 }
+
+.friends{
+    position: fixed;
+    top: 200px;
+    right: 50px;
+    border: 3px solid blue;
+    background-color: #007990;
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

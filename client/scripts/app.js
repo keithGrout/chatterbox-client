@@ -3,23 +3,46 @@
 var app = {
   init : function(){
     $(document).ready(function (){
-      console.log(window.location.search);
 
-      app.fetch(); // On page load, retrieve messages
+      var roomName;
+
+      $('body').on('submit', function(e){
+        e.preventDefault();
+
+      });
+
+      app.fetch(roomName); // On page load, retrieve messages
       $(".refresh").on("click", function(){
         $(".message").remove();
-        app.fetch();
+        app.fetch(roomName);
       });
-      $('.sendSomeStuff').on('click', function(){
+      $(".room").on("click", function(){
+        roomName = prompt("Which room would you like to enter?");
+        $(".message").remove();
+        app.fetch(roomName);
+        $('.roomName').text(roomName);
+
+      });
+
+      $('.sendSomeStuff').on('click', function(e){
         var newMessage = {};
+        e.preventDefault();
         newMessage['text'] = $('input').val();
         newMessage['username'] = window.location.search.slice(10);
-        newMessage['roomName'] = 'lobby';
-        //console.log(window.location.search);
-        console.log(newMessage);
+        newMessage['roomname'] = roomName;
         app.sendSomeStuff(newMessage);
+        $('input').val('');
+        $(".message").remove();
+        app.fetch(roomName);
         return false;
       });
+
+      $("body").on("click", '.user', function(){
+          $(this).css('font-weight', 'bold');
+      });
+
+
+
     });
   },
 
@@ -30,11 +53,10 @@ var app = {
       data: JSON.stringify(message),
       contentType: 'application/json',
       success: function (data) {
-        console.log(data);
+
       },
       error: function (data) {
         console.error('chatterbox: Failed to sendSomeStuff message');
-        //console.log(data);
       }
     });
   },
@@ -56,7 +78,11 @@ var app = {
           var message = "<div class='message chat'></div>";
 
           $('#main').append(message);
-          $('.message:last').text(results[i]['username']+": "+ results[i]["text"]);
+          var time = "<div class='time'></div>";
+          var user = "<div class='user'></div>";
+          $('.message:last').text(results[i]["text"] + " " + moment(results[i]['createdAt']).fromNow());
+          $('.message:last').prepend(user);
+          $(".user:last").text(results[i]["username"]);
         }
       },
       error: function (data) {
